@@ -1,0 +1,30 @@
+/*
+class Node
+{
+    int data;
+    Node left, right;
+
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}
+ */
+
+class Solution {
+    // Function to find the height of a binary tree.
+    int height(Node node) {
+        // code here
+        if(node == null){
+            return -1;
+        }
+        // Recursive call
+        int left_height = height(node.left);
+        int right_height = height(node.right);
+        return Math.max(left_height, right_height) + 1; // we are adding 1 to add the current node also
+    }
+}
+
+//Here we are using a Recursive approach to find the height of the tree
+
