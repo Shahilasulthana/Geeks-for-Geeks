@@ -1,0 +1,74 @@
+/*
+
+class Node{
+    int data;
+    Node left,right;
+    Node(int d){
+        data=d;
+        left=right=null;
+    }
+}*/
+
+class Solution {
+    // Function to check if two trees are identical.
+    boolean isIdentical(Node r1, Node r2) {
+        // Code Here
+        // We can solve this question by using Level order traversal using Queue 
+        // First we have to add all elements in two queues from two different BT's
+        // Then while polling all the elements we have to check whether elements polled from
+        // two different queues are equal or not.
+        // If both the elements polled are equal then return true else return false
+        
+        // here we are defining the edge cases that when both the trees are null then return true
+        if(r2 == null && r1 == null){
+            return true;
+        }
+        else if((r1 != null && r2 == null) || (r2 != null && r1 == null)){
+            return false;
+        }
+        
+         Queue<Node> q1 = new LinkedList<>();
+         Queue<Node> q2 = new LinkedList<>();
+         
+         q1.add(r1);
+         q2.add(r2);
+         
+         // here we are checking for another edge case that if the size of both the queues are
+         // different then we are gonna return false else we are gonna check for the uniqueness
+         
+         if(q1.size() != q2.size()){
+             return false;
+         }
+         else{
+             while(!q1.isEmpty() && !q2.isEmpty()){
+                 Node n1 = q1.poll();
+                 Node n2 = q2.poll();
+                 
+                 if(n1.data != n2.data){
+                     return false;
+                 }
+                 // checking the left children
+                 if(n1.left != null && n2.left != null){
+                     q1.add(n1.left);
+                     q2.add(n2.left);
+                 }
+                 
+                 else if(n1.left != null || n2.left != null){
+                         return false;
+                 }
+                 
+                 // checking right children
+                 if(n1.right != null && n2.right != null){
+                     q1.add(n1.right);
+                     q2.add(n2.right);
+                 }
+                 else if(n1.right != null || n2.right != null){
+                     return false;
+                 }
+             }
+         }
+         return q1.isEmpty() && q2.isEmpty();
+        
+        
+    }
+}
