@@ -1,0 +1,52 @@
+/* A Binary Tree node
+class Node
+{
+    int data;
+    Node left, right;
+   Node(int item)
+   {
+        data = item;
+        left = right = null;
+    }
+} */
+
+class Solution {
+    // Function to convert a binary tree into its mirror tree.
+    void mirror(Node node) {
+        // Your code here
+        // The goal here is to give the inverted binary tree as the output
+        // So what I think of doing is adding all the elements into the queue 
+        // while polling, we keep the root node as root and changing the left as 
+        // right child and right as left child 
+        // come let's go togther
+        
+        // we are defining some of the edge cases that if the root is null then simply return
+        if(node == null){
+            return;
+        }
+        
+        Queue<Node> q = new LinkedList<>(); // creating a queue to store the tree elements
+        
+        q.add(node);
+        
+        while(!q.isEmpty()){
+            Node curr = q.poll();
+            
+            
+            //swapping the elements of the tree
+            Node temp = curr.left;
+            curr.left = curr.right;
+            curr.right = temp;
+            // adding the elements to the queue
+            if(curr.left != null){
+                q.add(curr.left);
+            }
+            if(curr.right != null){
+                q.add(curr.right);
+            }
+        }
+        
+   }
+    
+}
+
