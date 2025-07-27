@@ -1,0 +1,51 @@
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+*/
+
+class Solution {
+    
+    int diameter = 0;// declaring globally
+    
+    public int diameter(Node root) {
+        // Your code here
+        
+        // Here we have to find the longest path or the diameter of the binary tree
+        // so what we are doing is, finding the left and right height of the tree separately
+        // Among that finding the maximum height of the tree
+        // The diameter of the tree can be calculated by means of the edges not by the nodes
+        
+         // defining an edge case that if the root is null then return 0
+        if(root == null){
+            return 0;
+        }
+        
+        height(root);
+        return diameter;
+        
+        
+    }
+    
+    private int height(Node node){
+        
+        if(node == null){
+            return 0;
+        }
+       
+        int lheight = height(node.left);
+        int rheight = height(node.right);
+        
+        diameter = Math.max(diameter, lheight + rheight);
+        
+        return 1 + Math.max(lheight, rheight);// here adding 1 because we have to include the current node also.
+    }
+    
+}
