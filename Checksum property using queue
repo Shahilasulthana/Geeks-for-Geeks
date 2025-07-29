@@ -1,0 +1,64 @@
+/*Complete the function below
+Node is as follows:
+class Node{
+    int data;
+    Node left,right;
+
+    Node(int key)
+    {
+        data = key;
+        left = right = null;
+    }
+}
+
+*/
+class Solution {
+    // Function to check whether all nodes of a tree have the value
+    // equal to the sum of their child nodes.
+    public static int isSumProperty(Node root) {
+        
+        // defining an edge case that if the root is null the property gets satisfied
+        if(root == null){
+            return 1;
+        }
+        
+        // Creating a queue to store elements
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        
+        while(!q.isEmpty()){
+            
+            Node curr = q.poll();
+            int sum = 0;
+            
+            
+            if(curr.left != null){
+                sum += curr.left.data;
+                q.add(curr.left);
+            }
+            if(curr.right != null){
+                sum += curr.right.data;
+                q.add(curr.right);
+            }
+            if((curr.left != null || curr.right != null) && (curr.data != sum)){
+                return 0;
+            }
+            
+         }
+        return 1;
+      
+    }
+    
+}
+
+// children sum property is one in which every node should be equal to sum of value of it's 
+// left and right child 
+
+// what we can do here is we can initialize a queue and add the elements to the queue
+// check whether the added node leafnode or not if it is a leafnode continue
+// If it is not a leaf node then add the values of left and right in the sum and check 
+// whether they are equal to curr node value, if they are equal then return 1 else
+// push the left and right node again
+
+// TIME COMPLEXITY : O(n)
+// SPACE COMPLEXITY : O(n)
