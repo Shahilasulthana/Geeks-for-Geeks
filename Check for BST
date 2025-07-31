@@ -1,0 +1,45 @@
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int val) {
+        data = val;
+        left = right = null;
+    }
+}
+*/
+
+class Solution {
+    // Function to check whether a Binary Tree is BST or not.
+    boolean isBST(Node root) {
+        // defining an edge case that if the root is null then return nothing
+       Stack<Node> s = new Stack<>();
+       Node curr = root;
+       Integer prev = null;
+       
+       while(curr != null || !s.isEmpty()){
+           while(curr != null){
+               s.push(curr);
+               curr = curr.left;
+           }
+           
+           
+          curr = s.pop();
+           if(prev != null && curr.data <= prev){
+               return false;
+           }
+           
+           prev = curr.data;
+           curr = curr.right;
+       }
+       return true;
+       
+        
+    }
+}
+
+// The inorder traversal of a binary search tree will always be in ascending order
+// First we traverse to the left most of the binary tree and if the previous is null then we 
+// move to the right and push it into the stack and printing it
