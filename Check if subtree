@@ -1,0 +1,41 @@
+/*complete the given function*/
+
+/* class Node{
+    int data;
+    Node left,right;
+    Node(int d)
+    {
+        data=d;
+        left=null;
+        right=null;
+    }
+}*/
+
+class Solution {
+    public static boolean isSubtree(Node T, Node S) {
+        // If subtree is null, it's always a subtree
+        if (S == null) return true;
+        
+        // If main tree is null but subtree isn't → not possible
+        if (T == null) return false;
+        
+        // If trees rooted at T and S are identical → true
+        if (identical(T, S)) return true;
+        
+        // Otherwise, try recursively in left or right subtree
+        return (isSubtree(T.left, S) || isSubtree(T.right, S));
+    }
+
+    private static boolean identical(Node T, Node S) {
+        // Both trees are null → identical
+        if (T == null && S == null) return true;
+        
+        // Only one is null → not identical
+        if (T == null || S == null) return false;
+        
+        // Check root data and recurse on left and right subtrees
+        return (T.data == S.data) && 
+               identical(T.left, S.left) && 
+               identical(T.right, S.right);
+    }
+}
