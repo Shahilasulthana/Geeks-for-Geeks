@@ -1,0 +1,35 @@
+// User function Template for Java
+
+/*class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
+    }
+}*/
+
+class Solution {
+    public int singlevalued(Node root) {
+        int[] count = new int[1]; // simulate pass-by-reference
+        isSingle(root, count);
+        return count[0];
+    }
+
+    public boolean isSingle(Node node, int[] count) {
+        if (node == null) return true;
+
+        boolean left = isSingle(node.left, count);
+        boolean right = isSingle(node.right, count);
+
+        if (!left || !right) return false;
+
+        if (node.left != null && node.left.data != node.data) return false;
+        if (node.right != null && node.right.data != node.data) return false;
+
+        count[0]++; // increment when it's a single-valued subtree
+        return true;
+    }
+}
